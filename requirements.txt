@@ -3,3 +3,12 @@ langchain-ollama
 openai
 python-dotenv
 langchain_openai
+# Additional dependencies for Google GenAI - day 3
+langchain
+langchain-google-genai
+# Additional dependencies for Hugging Face - day 3  
+langchain-huggingface
+transformers
+huggingface_hub
+# Additional dependencies for Groq - day 3
+groq
