@@ -1,9 +1,9 @@
 from langchain_ollama.chat_models import ChatOllama
 from langchain.prompts import ChatPromptTemplate
 
-prompt = ChatPromptTemplate.from_template(
+prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a helpful assistant."),
-    ("human", "Asnwer the following question: {question}"),
+    ("human", "Asnwer the following question: {question}")],
 )
 llm = ChatOllama(
     model="gemma3",)
