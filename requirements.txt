@@ -7,8 +7,21 @@ langchain_openai
 langchain
 langchain-google-genai
 # Additional dependencies for Hugging Face - day 3  
+huggingface_hub
 langchain-huggingface
 transformers
 huggingface_hub
 # Additional dependencies for Groq - day 3
 groq
+# Additional dependencies for LangChain Community - day 5
+langchain-community
+#pypdf for PDF handling
+pypdf
+#beautifulsoup4 for web scraping and parsing HTML
+beautifulsoup4
+bs4
+chromadb
+langchain_chroma
+faiss-cpu==1.7.4
+langchain-pinecone
+pinecone
