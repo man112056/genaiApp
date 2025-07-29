@@ -4,6 +4,10 @@ from langchain.schema import Document
 from langchain_chroma import Chroma
 from langchain_ollama import OllamaEmbeddings
 
+from langchain.chains import RetrievalQA
+from langchain_ollama import ChatOllama
+from langchain_core.prompts import PromptTemplate
+
 document1= Document(
     page_content='Virat kohli is one of the most successful and consistant batsman in the world. He has scored more than 70 international centuries and is known for his aggressive batting style.',
     metadata={'team':'Royal Challengers Bangalore'}
@@ -43,4 +47,30 @@ vector_store = Chroma(
 
 vector_store.add_documents(documents)
 
-print(vector_store.get(include=['embeddings','documents','metadatas']))
+# print(vector_store.get(include=['embeddings','documents','metadatas']))
+
+llm = ChatOllama(model="gemma3:latest")
+prompt_template = """You are an expert in cricket statistics and player analysis. Given the following documents about cricket players, answer the question based on the information provided.
+Context: {context}
+Question: {question}
+Answer:
+
+"""
+
+prompt_template = PromptTemplate(
+    template=prompt_template,
+    input_variables=["context", "question"]
+)
+qa_chain = RetrievalQA.from_chain_type(
+    llm=llm,
+    chain_type="stuff",
+    retriever=vector_store.as_retriever(),
+    chain_type_kwargs={"prompt": prompt_template}
+    )
+
+query = "Who is the best batsman in IPL?"
+result = qa_chain.invoke({"query": query})
+
+print(result['result'])
+                                                                                 
+
